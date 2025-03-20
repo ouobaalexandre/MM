@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - Application MM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./styles.css">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; }
+    form { max-width: 500px; margin: auto; }
+    input, button { padding: 10px; margin: 5px; width: 100%; }
+  </style>
+  <script>
+    // Vérification très simple du mot de passe
+    document.addEventListener('DOMContentLoaded', function(){
+      var password = prompt("Veuillez entrer le mot de passe pour accéder à l'interface admin:");
+      if (password !== "17112010") {
+        alert("Mot de passe incorrect !");
+        window.location.href = "index.html"; // redirige vers l'index principal
+      }
+    });
+  </script>
+</head>
+<body>
+  <h1>Dashboard Admin</h1>
+  <p>Utilisez ce formulaire pour ajouter un modèle à la galerie.</p>
+  <form id="addModelForm">
+    <label for="id">ID du modèle (ex. MM1):</label>
+    <input type="text" id="id" name="id" required>
+    
+    <label for="title">Titre :</label>
+    <input type="text" id="title" name="title" required>
+    
+    <label for="glb">Chemin du fichier .glb :</label>
+    <input type="text" id="glb" name="glb" required>
+    
+    <label for="thumbnail">Chemin de l'image miniature (.png) :</label>
+    <input type="text" id="thumbnail" name="thumbnail" required>
+    
+    <button type="submit">Ajouter le modèle</button>
+  </form>
+  
+  <script>
+    document.getElementById('addModelForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const newModel = {
+        id: document.getElementById('id').value,
+        title: document.getElementById('title').value,
+        glb: document.getElementById('glb').value,
+        thumbnail: document.getElementById('thumbnail').value
+      };
+      console.log("Nouveau modèle à ajouter:", newModel);
+      alert("Nouvelle entrée pour le fichier JSON (cette fonctionnalité doit être implémentée côté serveur).");
+      event.target.reset();
+    });
+  </script>
+</body>
+</html>

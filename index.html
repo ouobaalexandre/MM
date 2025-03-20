@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Application MM - Modèles 3D</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .model-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      width: 300px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .model-card:hover {
+      transform: translateY(-5px);
+    }
+    .model-card img {
+      max-width: 100%;
+      border-radius: 5px;
+    }
+    .model-card h3 {
+      margin: 10px 0;
+      font-size: 1.3em;
+    }
+    .view-model-link {
+      display: block;
+      margin: 10px auto;
+      padding: 10px 15px;
+      background-color: #007BFF;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      width: 80%;
+    }
+    .view-model-link:hover {
+      background-color: #0056b3;
+    }
+    /* Style du bouton admin */
+    .admin-toggle {
+      display: inline-block;
+      margin: 30px auto;
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    /* Panneau admin caché par défaut */
+    #adminPanel {
+      display: none;
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 20px;
+      background-color: #fff;
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #adminPanel h2 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Application MM - Modèles 3D</h1>
+
+  <!-- Galerie principale (exemple statique ici) -->
+  <div class="container" id="modelsContainer">
+    <!-- Exemple de carte pour MM1 -->
+    <div class="model-card">
+      <img src="MM1.png" alt="Modèle MM1">
+      <h3>Modèle MM1</h3>
+      <a href="MM1/index.html" class="view-model-link">Voir le modèle 3D</a>
+    </div>
+    <!-- Vous répéterez les blocs pour MM2, MM3, etc. -->
+  </div>
+
+  <!-- Bouton pour accéder à l'interface admin -->
+  <div>
+    <div class="admin-toggle" id="adminToggle">Accéder à l'interface admin</div>
+  </div>
+
+  <!-- Panneau admin caché -->
+  <div id="adminPanel">
+    <h2>Interface Administrateur</h2>
+    <!-- Exemple de formulaire d'ajout de modèle -->
+    <form id="adminForm">
+      <label for="modelId">ID du modèle :</label>
+      <input type="text" id="modelId" name="modelId" placeholder="ex. MM4" required>
+      
+      <label for="modelTitle">Titre :</label>
+      <input type="text" id="modelTitle" name="modelTitle" placeholder="Titre du modèle" required>
+      
+      <label for="modelGlb">Chemin du fichier .glb :</label>
+      <input type="text" id="modelGlb" name="modelGlb" placeholder="MM4/MM4.glb" required>
+      
+      <label for="modelThumbnail">Chemin de la miniature :</label>
+      <input type="text" id="modelThumbnail" name="modelThumbnail" placeholder="images/MM4.png" required>
+      
+      <button type="submit">Ajouter/modifier le modèle</button>
+    </form>
+  </div>
+
+  <script>
+    // Gestion de l'accès à l'interface admin
+    document.getElementById('adminToggle').addEventListener('click', function() {
+      const passwd = prompt("Entrez le mot de passe pour accéder à l'interface admin :");
+      if (passwd === "17112010") {
+        // Déverrouille l'admin panel
+        document.getElementById('adminPanel').style.display = "block";
+      }
+      else {
+        alert("Mot de passe incorrect !");
+      }
+    });
+    
+    // Exemple : gestion du formulaire admin
+    document.getElementById('adminForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Récupérer les données du formulaire
+      const id = document.getElementById('modelId').value;
+      const title = document.getElementById('modelTitle').value;
+      const glb = document.getElementById('modelGlb').value;
+      const thumbnail = document.getElementById('modelThumbnail').value;
+      
+      // Pour une véritable mise à jour du site,
+      // ces données devraient être envoyées à une API pour mettre à jour le fichier JSON ou le contenu du site
+      console.log("Modèle à ajouter/modifier :", { id, title, glb, thumbnail });
+      alert("Ce modèle a été soumis (fonctionnalité d'administration à développer côté serveur).");
+      
+      // On pourra réinitialiser le formulaire
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
