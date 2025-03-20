@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Modèle 3D MM1</title>
+  <meta name="description" content="Visualisation du modèle 3D MM1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link type="text/css" href="../styles.css" rel="stylesheet"/>
+  <style>
+    .viewer-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      margin: 0;
+    }
+    model-viewer {
+      width: 100%;
+      height: 100%;
+    }
+    .loader {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 10;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 8px;
+    }
+    .spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #007BFF;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 2s linear infinite;
+      margin: 0 auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .progress-text {
+      margin-top: 10px;
+      font-size: 1.2em;
+      color: #333;
+    }
+    .button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .button-container a {
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      color: #333;
+      margin: 10px;
+    }
+    .button-container a:hover {
+      background-color: #eee;
+    }
+  </style>
+</head>
+<body>
+  <div class="viewer-container">
+    <div id="loader" class="loader">
+      <div class="spinner"></div>
+      <div id="progress" class="progress-text">0%</div>
+    </div>
+    <model-viewer src="models/MM1.glb" 
+      ar ar-modes="webxr scene-viewer quick-look" 
+      camera-controls auto-rotate 
+      tone-mapping="agx"
+      shadow-intensity="2" exposure="2" shadow-softness="0"
+      environment-image="legacy">
+      <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+      </div>
+      <button slot="ar-button" id="ar-button">View in your space</button>
+      <div id="ar-prompt">
+        <img src="../images/ar_hand_prompt.png" alt="Prompt">
+      </div>
+    </model-viewer>
+  </div>
+  
+  <div class="button-container">
+    <a href="../index.html">Retour à l'accueil</a>
+  </div>
+  
+  <script src="../script.js"></script>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+  <script>
+    const modelViewer = document.querySelector('model-viewer');
+    const loader = document.getElementById('loader');
+    const progressText = document.getElementById('progress');
+    
+    modelViewer.addEventListener('progress', event => {
+      const progress = event.detail.totalProgress;
+      progressText.textContent = Math.round(progress * 100) + '%';
+    });
+    
+    modelViewer.addEventListener('load', () => {
+      loader.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
