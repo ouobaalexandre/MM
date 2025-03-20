@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Modèle 3D MM5</title>
+  <meta name="description" content="Visualisation du modèle 3D MM5">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link type="text/css" href="./styles.css" rel="stylesheet"/>
+</head>
+<body>
+  <model-viewer src="MM5.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls auto-rotate tone-mapping="agx" poster="poster.webp" shadow-intensity="2" exposure="2" shadow-softness="0" environment-image="legacy">
+    <div class="progress-bar hide" slot="progress-bar">
+      <div class="update-bar"></div>
+    </div>
+    <button slot="ar-button" id="ar-button">View in your space</button>
+    <div id="ar-prompt">
+      <img src="ar_hand_prompt.png">
+    </div>
+  </model-viewer>
+
+  <!-- Bouton de retour à l'accueil -->
+  <div style="text-align: center; margin-top: 20px;">
+    <a href="../" style="text-decoration: none; padding: 10px 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #fff; color: #333;">
+      Retour à l'accueil
+    </a>
+  </div>
+
+  <script src="script.js"></script>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+</body>
+</html>
